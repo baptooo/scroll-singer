@@ -1,9 +1,10 @@
 import { Button, ListItem, OrderedList, Text, VStack } from "@chakra-ui/react";
-import React from "react";
-import { useClipboard } from "../hooks/use-clipboard";
+import React, { useCallback } from "react";
+import { useClipboard, useGrantAccess } from "../hooks/use-clipboard";
 
 export const Home: React.FC = (props) => {
   const clip = useClipboard();
+  const grantAccess = useGrantAccess();
 
   return (
     <VStack padding="8" spacing="8" alignItems="flex-start">
@@ -27,11 +28,16 @@ export const Home: React.FC = (props) => {
               </Button>
             </VStack>
           ) : (
-            <Text marginTop="2" fontSize="xs">
-              We need this permission in order to be able to get what was in
-              your clipboard, if you dont't consent it's OK you'll be able to
-              paste yourself inside of the box
-            </Text>
+            <VStack alignItems="flex-start">
+              <Text marginTop="2" fontSize="xs">
+                We need this permission in order to be able to get what was in
+                your clipboard, if you dont't consent it's OK you'll be able to
+                paste yourself inside of the box
+              </Text>
+              <Button onClick={() => grantAccess()} colorScheme="green">
+                Grant access
+              </Button>
+            </VStack>
           )}
         </ListItem>
         <ListItem>
