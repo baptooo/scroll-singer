@@ -13,7 +13,7 @@ import { useClipboard } from "../hooks/use-clipboard";
 
 export const Song: React.FC<PropsWithChildren<any>> = (props) => {
   const clip = useClipboard();
-  const [speed, setSpeed] = useState(90);
+  const [speed, setSpeed] = useState(20);
   const { isOpen: playing, onToggle: playPause } = useDisclosure();
   const [animationStyle, setAnimationStyle] = useState("");
 
@@ -82,7 +82,7 @@ export const Song: React.FC<PropsWithChildren<any>> = (props) => {
         />
         <IconButton
           colorScheme="green"
-          onClick={() => setSpeed(Math.max(20, speed - 10))}
+          onClick={() => setSpeed(Math.max(10, speed - 10))}
           aria-label="play-payse"
           icon={<Icon as={AiOutlineMinus} />}
         />
@@ -92,7 +92,7 @@ export const Song: React.FC<PropsWithChildren<any>> = (props) => {
         </VStack>
         <IconButton
           colorScheme="green"
-          onClick={() => setSpeed(Math.min(240, speed + 10))}
+          onClick={() => setSpeed(Math.min(120, speed + 10))}
           aria-label="play-payse"
           icon={<Icon as={AiOutlinePlus} />}
         />
