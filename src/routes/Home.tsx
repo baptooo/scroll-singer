@@ -1,5 +1,5 @@
 import { Button, ListItem, OrderedList, Text, VStack } from "@chakra-ui/react";
-import React, { useCallback } from "react";
+import React from "react";
 import { useClipboard, useGrantAccess } from "../hooks/use-clipboard";
 
 export const Home: React.FC = (props) => {

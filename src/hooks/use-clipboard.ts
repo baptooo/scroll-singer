@@ -7,7 +7,7 @@ export const useGrantAccess = () => {
   const clip = useClipboard();
 
   return useCallback(() => {
-    localStorage.setItem(CONSENT_KEY, true);
+    localStorage.setItem(CONSENT_KEY, "true");
     clip.refetch();
   }, [clip]);
 };
