@@ -6,20 +6,46 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
-import React, { PropsWithChildren, useState } from "react";
+import React, { PropsWithChildren, useCallback, useState } from "react";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { BsArrowRepeat, BsFillPlayFill } from "react-icons/bs";
-import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { useClipboard } from "../hooks/use-clipboard";
-import "./Song.css";
 
 export const Song: React.FC<PropsWithChildren<any>> = (props) => {
   const clip = useClipboard();
   const [speed, setSpeed] = useState(90);
   const { isOpen: playing, onToggle: playPause } = useDisclosure();
+  const [animationStyle, setAnimationStyle] = useState("");
+
+  const setTextRef = useCallback(
+    (ref: HTMLParagraphElement & HTMLPreElement) => {
+      requestAnimationFrame(() => {
+        if (ref == null || ref.parentElement == null) {
+          return;
+        }
+
+        const scrollAmount =
+          ref.scrollHeight - ref.parentElement.offsetHeight + 100;
+        setAnimationStyle(`
+        @keyframes scroll-singer {
+          from {
+            transform: none;
+          }
+        
+          to {
+            transform: translate3d(0, -${scrollAmount}px, 0);
+          }
+        }      
+        `);
+      });
+    },
+    []
+  );
 
   return (
     <VStack width="100%" overflow="hidden">
       <Text
+        ref={setTextRef}
         as="pre"
         fontSize="sm"
         whiteSpace="break-spaces"
@@ -56,7 +82,7 @@ export const Song: React.FC<PropsWithChildren<any>> = (props) => {
         />
         <IconButton
           colorScheme="green"
-          onClick={() => setSpeed(Math.max(30, speed - 10))}
+          onClick={() => setSpeed(Math.max(20, speed - 10))}
           aria-label="play-payse"
           icon={<Icon as={AiOutlineMinus} />}
         />
@@ -71,6 +97,7 @@ export const Song: React.FC<PropsWithChildren<any>> = (props) => {
           icon={<Icon as={AiOutlinePlus} />}
         />
       </HStack>
+      <style type="text/css">{animationStyle}</style>
     </VStack>
   );
 };
