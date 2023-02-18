@@ -6,16 +6,29 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
-import React, { PropsWithChildren, useCallback, useState } from "react";
+import React, {
+  PropsWithChildren,
+  useCallback,
+  useMemo,
+  useState,
+} from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { BsArrowRepeat, BsFillPlayFill } from "react-icons/bs";
 import { useClipboard } from "../hooks/use-clipboard";
 
+const MIN_SPEED = 1;
+const MAX_SPEED = 10;
+
 export const Song: React.FC<PropsWithChildren<any>> = (props) => {
   const clip = useClipboard();
-  const [speed, setSpeed] = useState(20);
+  const [speed, setSpeed] = useState(5);
   const { isOpen: playing, onToggle: playPause } = useDisclosure();
   const [animationStyle, setAnimationStyle] = useState("");
+  const scrollSpeed = useMemo(() => {
+    if (clip.data != null) {
+      return (clip.data.length / 100) * (MAX_SPEED + 1 - speed);
+    }
+  }, [speed, clip.data]);
 
   const setTextRef = useCallback(
     (ref: HTMLParagraphElement & HTMLPreElement) => {
@@ -53,9 +66,8 @@ export const Song: React.FC<PropsWithChildren<any>> = (props) => {
         colorScheme="black"
         textAlign="left"
         paddingY="16"
-        paddingBottom="-100vh"
         animation={
-          playing ? `scroll-singer forwards linear ${speed}s` : undefined
+          playing ? `scroll-singer forwards linear ${scrollSpeed}s` : undefined
         }
       >
         {clip.data}
@@ -82,17 +94,17 @@ export const Song: React.FC<PropsWithChildren<any>> = (props) => {
         />
         <IconButton
           colorScheme="green"
-          onClick={() => setSpeed(Math.max(10, speed - 10))}
+          onClick={() => setSpeed(Math.max(MIN_SPEED, speed - 1))}
           aria-label="play-payse"
           icon={<Icon as={AiOutlineMinus} />}
         />
         <VStack>
           <Text>{speed}</Text>
-          <Text fontSize="xs">Speed (in seconds)</Text>
+          <Text fontSize="xs">Speed</Text>
         </VStack>
         <IconButton
           colorScheme="green"
-          onClick={() => setSpeed(Math.min(120, speed + 10))}
+          onClick={() => setSpeed(Math.min(MAX_SPEED, speed + 1))}
           aria-label="play-payse"
           icon={<Icon as={AiOutlinePlus} />}
         />
