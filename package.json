@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build --force",
-    "start": "node server.mjs",
+    "preview": "vite preview",
     "deploy": "yarn build && yarn surge dist scroll-singer.surge.sh"
   },
   "dependencies": {
