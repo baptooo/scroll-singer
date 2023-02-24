@@ -10,6 +10,9 @@
     "deploy": "yarn build && yarn surge dist scroll-singer.surge.sh"
   },
   "dependencies": {
+    "vite": "^4.1.0"
+  },
+  "devDependencies": {
     "@chakra-ui/icons": "^2.0.17",
     "@chakra-ui/react": "^2.5.0",
     "@emotion/react": "^11.10.5",
@@ -22,9 +25,6 @@
     "react-query": "^3.39.3",
     "react-router": "^6.8.1",
     "react-router-dom": "^6.8.1",
-    "vite": "^4.1.0"
-  },
-  "devDependencies": {
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.1.0",
@@ -33,7 +33,6 @@
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.4",
-    "surge": "^0.23.1",
     "typescript": "^4.9.3",
     "vite-plugin-eslint": "^1.8.1"
   }
