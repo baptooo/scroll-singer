@@ -1,6 +1,5 @@
 import express from "express";
 import proxy from "express-http-proxy";
-import path from "path";
 
 const app = express();
 

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --force",
     "start": "node server.mjs",
     "deploy": "yarn build && yarn surge dist scroll-singer.surge.sh"
   },
