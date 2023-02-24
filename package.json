@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "postbuild": "ls -alh && du -sh . node_modules dist",
+    "postbuild": "ls -alh && du -sh . && ls -d */|xargs -n 1 du -sh",
     "preview": "vite preview",
     "deploy": "yarn build && yarn surge dist scroll-singer.surge.sh"
   },
