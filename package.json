@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && cp package.json ./dist/package.json",
-    "start": "vite preview --https --port 80",
+    "start": "vite preview --https --port $PORT",
     "deploy": "yarn build && yarn surge dist scroll-singer.surge.sh"
   },
   "dependencies": {
@@ -21,7 +21,8 @@
     "react-icons": "^4.7.1",
     "react-query": "^3.39.3",
     "react-router": "^6.8.1",
-    "react-router-dom": "^6.8.1"
+    "react-router-dom": "^6.8.1",
+    "vite": "^4.1.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",
@@ -34,7 +35,6 @@
     "prettier": "^2.8.4",
     "surge": "^0.23.1",
     "typescript": "^4.9.3",
-    "vite": "^4.1.0",
     "vite-plugin-eslint": "^1.8.1"
   }
 }
