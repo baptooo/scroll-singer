@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && cp package.json ./dist/package.json",
     "start": "vite preview --https --port 80",
     "deploy": "yarn build && yarn surge dist scroll-singer.surge.sh"
   },
