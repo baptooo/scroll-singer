@@ -6,9 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "postbuild": "ls -alh && du -sh . && ls -d */|xargs -n 1 du -sh",
-    "preview": "vite preview",
-    "deploy": "yarn build && yarn surge dist scroll-singer.surge.sh"
+    "postbuild": "cp server.js package.json ./dist && cd dist && yarn install --production",
+    "preview": "vite preview"
   },
   "dependencies": {
     "express": "^4.18.2",
