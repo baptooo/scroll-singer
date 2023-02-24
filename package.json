@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "start": "vite preview",
+    "start": "vite preview --https --port 80",
     "deploy": "yarn build && yarn surge dist scroll-singer.surge.sh"
   },
   "dependencies": {
