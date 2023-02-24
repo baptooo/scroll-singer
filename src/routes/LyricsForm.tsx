@@ -1,10 +1,8 @@
-import { ArrowRightIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 import {
   Avatar,
   Box,
-  Flex,
   FormControl,
-  FormLabel,
   HStack,
   Input,
   InputGroup,

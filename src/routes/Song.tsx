@@ -16,7 +16,6 @@ import React, {
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { BsArrowRepeat, BsFillPlayFill } from "react-icons/bs";
 import { useParams } from "react-router";
-import { useClipboard } from "../hooks/use-clipboard";
 import { useScrapLyrics } from "../queries/lyrics.queries";
 
 const MIN_SPEED = 1;
