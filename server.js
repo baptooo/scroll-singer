@@ -3,7 +3,7 @@ import proxy from "express-http-proxy";
 
 const app = express();
 
-app.use(express.static("./"));
+app.use(express.static("./dist"));
 app.use(
   "/lyrics",
   proxy("https://genius.com", {

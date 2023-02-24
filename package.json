@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "postbuild": "cp server.js package.json ./dist",
+    "postbuild": "yarn install --production",
     "preview": "vite preview",
     "deploy": "yarn build && yarn surge dist scroll-singer.surge.sh"
   },
