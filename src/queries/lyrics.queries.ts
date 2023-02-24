@@ -42,7 +42,7 @@ export const useScrapLyrics = (path: string | undefined) => {
   return useQuery(
     ["lyrics", path],
     async function (data) {
-      const resp = await fetch(`/lyrics${path}`);
+      const resp = await fetch(`/lyrics/${path}`);
       return await resp.text();
     },
     {
