@@ -1,15 +1,19 @@
-import { useClipboard } from "./hooks/use-clipboard";
-import { Home } from "./routes/Home";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Main } from "./components/Main";
+import { LyricsForm } from "./routes/LyricsForm";
 import { Song } from "./routes/Song";
 
 function App() {
-  const clip = useClipboard();
-
-  if (clip.isError || clip.data == null) {
-    return <Home />;
-  }
-
-  return <Song />;
+  return (
+    <BrowserRouter>
+      <Main>
+        <Routes>
+          <Route index path="/" element={<LyricsForm />} />
+          <Route path="/song/:path" element={<Song />} />
+        </Routes>
+      </Main>
+    </BrowserRouter>
+  );
 }
 
 export default App;

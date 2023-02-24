@@ -4,9 +4,8 @@ import { Logo } from "./Logo";
 
 export const Main: React.FC<PropsWithChildren<any>> = (props) => {
   return (
-    <VStack padding="4" maxHeight="100vh" overflow="hidden">
+    <VStack padding="4">
       <Logo />
-
       {props.children}
     </VStack>
   );

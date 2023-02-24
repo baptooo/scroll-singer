@@ -2,6 +2,7 @@ import {
   HStack,
   Icon,
   IconButton,
+  Spinner,
   Text,
   useDisclosure,
   VStack,
@@ -14,21 +15,24 @@ import React, {
 } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { BsArrowRepeat, BsFillPlayFill } from "react-icons/bs";
+import { useParams } from "react-router";
 import { useClipboard } from "../hooks/use-clipboard";
+import { useScrapLyrics } from "../queries/lyrics.queries";
 
 const MIN_SPEED = 1;
 const MAX_SPEED = 10;
 
 export const Song: React.FC<PropsWithChildren<any>> = (props) => {
-  const clip = useClipboard();
+  const params = useParams();
+  const lyrics = useScrapLyrics(params.path);
   const [speed, setSpeed] = useState(5);
   const { isOpen: playing, onToggle: playPause } = useDisclosure();
   const [animationStyle, setAnimationStyle] = useState("");
   const scrollSpeed = useMemo(() => {
-    if (clip.data != null) {
-      return (clip.data.length / 100) * (MAX_SPEED + 1 - speed);
+    if (lyrics.data != null) {
+      return (lyrics.data.length / 100) * (MAX_SPEED + 1 - speed);
     }
-  }, [speed, clip.data]);
+  }, [speed, lyrics.data]);
 
   const setTextRef = useCallback(
     (ref: HTMLParagraphElement & HTMLPreElement) => {
@@ -55,8 +59,12 @@ export const Song: React.FC<PropsWithChildren<any>> = (props) => {
     []
   );
 
+  if (lyrics.isLoading && !lyrics.data) {
+    return <Spinner />;
+  }
+
   return (
-    <VStack width="100%" overflow="hidden">
+    <VStack width="100%" maxHeight="calc(100vh - 100px)" overflow="hidden">
       <Text
         ref={setTextRef}
         as="pre"
@@ -70,17 +78,17 @@ export const Song: React.FC<PropsWithChildren<any>> = (props) => {
           playing ? `scroll-singer forwards linear ${scrollSpeed}s` : undefined
         }
       >
-        {clip.data}
+        {lyrics.data}
       </Text>
       <HStack
         paddingY="4"
         paddingX="2"
         position="fixed"
         bottom="0"
-        left="2"
-        right="2"
+        left="0"
+        right="0"
         background="white"
-        borderRadius="md"
+        borderRadius="0.5rem 0.5rem 0 0"
         boxShadow="0 0 4rem #ccc"
         justifyContent="space-between"
         zIndex={1}
@@ -98,7 +106,7 @@ export const Song: React.FC<PropsWithChildren<any>> = (props) => {
           aria-label="play-payse"
           icon={<Icon as={AiOutlineMinus} />}
         />
-        <VStack>
+        <VStack spacing="0">
           <Text>{speed}</Text>
           <Text fontSize="xs">Speed</Text>
         </VStack>
